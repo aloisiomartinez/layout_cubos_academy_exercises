@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -83,9 +82,8 @@ class MenuDrawer extends StatelessWidget {
                 trailing: const Icon(Icons.arrow_right),
                 onTap: () {},
               ),
-               ListTile(
-                leading: 
-                const Padding(
+              ListTile(
+                leading: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: Icon(Icons.coffee, color: Colors.brown, size: 40),
                 ),
@@ -93,7 +91,7 @@ class MenuDrawer extends StatelessWidget {
                 subtitle: const Text('Quero cafééé'),
                 trailing: const Icon(Icons.arrow_right),
                 onTap: () {},
-              ), 
+              ),
             ],
           ),
         ),
@@ -129,33 +127,50 @@ class MyNavigationBar extends StatelessWidget {
 }
 
 class ProgressBarExercise extends StatefulWidget {
+  
   const ProgressBarExercise({Key? key}) : super(key: key);
 
   @override
   State<ProgressBarExercise> createState() => _ProgressBarExerciseState();
 }
 
+
+
 class _ProgressBarExerciseState extends State<ProgressBarExercise> {
+  double progress = 0;
+
+  void progressBarValue() {
+    setState(() {
+      progress += 0.2;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 150.0, vertical: 300),
-        child: FloatingActionButton.extended(
-          label: const Text('Upload'),
-          icon: const Icon(Icons.upload),
-          onPressed: () {}, 
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ProgressBar'),
       ),
-      body: 
-         const Padding(
-          padding: EdgeInsets.only(top: 400),
-          
-          child: LinearProgressIndicator(
-            backgroundColor: Colors.amber,
-            value: 0.5,
-          ),
-        
+      body: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.symmetric(
+          vertical: 200
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            FloatingActionButton.extended(
+              label: const Text('Upload'),
+              icon: const Icon(Icons.upload),
+              onPressed: progressBarValue,
+            ),
+            Container(margin: const EdgeInsets.all(10.0),),
+             LinearProgressIndicator(
+              backgroundColor: Colors.amber,
+              value: progress,
+            ),
+          ],
+        ),
       ),
     );
   }
