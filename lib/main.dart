@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: _title,
-      home: ProgressBarExercise(),
+      home: CardNFT(),
     );
   }
 }
@@ -128,14 +128,11 @@ class MyNavigationBar extends StatelessWidget {
 }
 
 class ProgressBarExercise extends StatefulWidget {
-  
   const ProgressBarExercise({Key? key}) : super(key: key);
 
   @override
   State<ProgressBarExercise> createState() => _ProgressBarExerciseState();
 }
-
-
 
 class _ProgressBarExerciseState extends State<ProgressBarExercise> {
   double progress = 0;
@@ -143,22 +140,21 @@ class _ProgressBarExerciseState extends State<ProgressBarExercise> {
   Random randomNumbers = Random();
   String text = 'Clique para iniciar o upload';
   bool disableButton = false;
-  
+
   void progressBarValue() {
     setState(() {
       progress += randomNumbers.nextInt(30);
       progressPercent = progress * 0.01;
-      
+
       text = progressPercent.toString();
-      
-      if(progressPercent >= 1 ) {
+
+      if (progressPercent >= 1) {
         text = 'Upload Completo';
         disableButton = true;
       } else {
         progressPercent /= 0.01;
         text = '$progressPercent%';
       }
-
     });
   }
 
@@ -170,9 +166,7 @@ class _ProgressBarExerciseState extends State<ProgressBarExercise> {
       ),
       body: Container(
         alignment: Alignment.center,
-        margin: const EdgeInsets.symmetric(
-          vertical: 200
-        ),
+        margin: const EdgeInsets.symmetric(vertical: 200),
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
@@ -181,7 +175,9 @@ class _ProgressBarExerciseState extends State<ProgressBarExercise> {
               icon: const Icon(Icons.upload),
               onPressed: disableButton ? null : progressBarValue,
             ),
-            Container(margin: const EdgeInsets.all(40.0),),
+            Container(
+              margin: const EdgeInsets.all(40.0),
+            ),
             Text(text),
             LinearProgressIndicator(
               backgroundColor: Colors.amber,
@@ -191,5 +187,89 @@ class _ProgressBarExerciseState extends State<ProgressBarExercise> {
         ),
       ),
     );
+  }
+}
+
+class CardNFT extends StatelessWidget {
+  const CardNFT({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('ProgressBar'),
+        ),
+        body: Container(
+          color: Colors.blue.shade900,
+          child: Card(
+            color: Colors.blue.shade900,
+            child: Column(
+              children: [
+                Image.network(
+                    'https://camo.githubusercontent.com/dc30ec513e394f4863cdd26fcf702fb5519280a1f2ed33736771477e64d005dc/68747470733a2f2f692e696d6775722e636f6d2f773339717a61712e706e67'),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    'Equilibrium #3429',
+                    style: TextStyle(color: Colors.greenAccent, fontSize: 20),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                      'Nossa coleção Equilibrium promove calma e balanço',
+                      style: TextStyle(color: Colors.grey)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        '0.041 ETH',
+                        style:
+                            TextStyle(color: Colors.greenAccent, fontSize: 20),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 20, right: 4),
+                          alignment: Alignment.centerLeft,
+                          child:  const Icon(Icons.watch_later_rounded, color: Colors.grey,)
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          alignment: Alignment.centerLeft,
+                          child: const Text(' restam 3 dias',
+                              style: TextStyle(color: Colors.grey)),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: const Divider(color: Colors.grey,),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 10),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.person_rounded, size: 40,),
+                      SizedBox(width: 10,),
+                      Text('Criado por', style: TextStyle(color: Colors.blue)),
+                      Text(' Aloisio Martinez', style: TextStyle(color: Colors.white))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
