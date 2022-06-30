@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -138,10 +139,26 @@ class ProgressBarExercise extends StatefulWidget {
 
 class _ProgressBarExerciseState extends State<ProgressBarExercise> {
   double progress = 0;
-
+  double progressPercent = 0;
+  Random randomNumbers = Random();
+  String text = 'Clique para iniciar o upload';
+  bool disableButton = false;
+  
   void progressBarValue() {
     setState(() {
-      progress += 0.2;
+      progress += randomNumbers.nextInt(30);
+      progressPercent = progress * 0.01;
+      
+      text = progressPercent.toString();
+      
+      if(progressPercent >= 1 ) {
+        text = 'Upload Completo';
+        disableButton = true;
+      } else {
+        progressPercent /= 0.01;
+        text = '$progressPercent%';
+      }
+
     });
   }
 
@@ -162,12 +179,13 @@ class _ProgressBarExerciseState extends State<ProgressBarExercise> {
             FloatingActionButton.extended(
               label: const Text('Upload'),
               icon: const Icon(Icons.upload),
-              onPressed: progressBarValue,
+              onPressed: disableButton ? null : progressBarValue,
             ),
-            Container(margin: const EdgeInsets.all(10.0),),
-             LinearProgressIndicator(
+            Container(margin: const EdgeInsets.all(40.0),),
+            Text(text),
+            LinearProgressIndicator(
               backgroundColor: Colors.amber,
-              value: progress,
+              value: progress * 0.01,
             ),
           ],
         ),
