@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: _title,
-      home: MenuDrawer(),
+      home: ProgressBarExercise(),
     );
   }
 }
@@ -54,32 +55,47 @@ class MenuDrawer extends StatelessWidget {
         ),
         backgroundColor: Colors.pinkAccent,
       ),
-      endDrawer: Drawer(
-        backgroundColor: Colors.pink.shade100,
-        child: ListView(
-          children: [
-            ListTile(
-              leading: const FlutterLogo(),
-              title: const Text('Flutter'),
-              subtitle: const Text('Tudo são Widgets'),
-              trailing: const Icon(Icons.arrow_right),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.face, color: Colors.red),
-              title: const Text('Dart'),
-              subtitle: const Text('É muito forte'),
-              trailing: const Icon(Icons.arrow_right),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.coffee, color: Colors.brown),
-              title: const Text('Cafessineo'),
-              subtitle: const Text('Quero cafééé'),
-              trailing: const Icon(Icons.arrow_right),
-              onTap: () {},
-            ),
-          ],
+      endDrawer: SafeArea(
+        child: Drawer(
+          backgroundColor: Colors.pink.shade100,
+          child: ListView(
+            children: [
+              ListTile(
+                leading: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Icon(
+                      Icons.flash_on,
+                      color: Colors.blue,
+                      size: 40,
+                    )),
+                title: const Text('Flutter'),
+                subtitle: const Text('Tudo são Widgets'),
+                trailing: const Icon(Icons.arrow_right),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Icon(Icons.mood, color: Colors.red, size: 40),
+                ),
+                title: const Text('Dart'),
+                subtitle: const Text('É muito forte'),
+                trailing: const Icon(Icons.arrow_right),
+                onTap: () {},
+              ),
+               ListTile(
+                leading: 
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Icon(Icons.coffee, color: Colors.brown, size: 40),
+                ),
+                title: const Text('Cafessineo'),
+                subtitle: const Text('Quero cafééé'),
+                trailing: const Icon(Icons.arrow_right),
+                onTap: () {},
+              ), 
+            ],
+          ),
         ),
       ),
     );
@@ -107,6 +123,39 @@ class MyNavigationBar extends StatelessWidget {
             label: 'Login',
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProgressBarExercise extends StatefulWidget {
+  const ProgressBarExercise({Key? key}) : super(key: key);
+
+  @override
+  State<ProgressBarExercise> createState() => _ProgressBarExerciseState();
+}
+
+class _ProgressBarExerciseState extends State<ProgressBarExercise> {
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 150.0, vertical: 300),
+        child: FloatingActionButton.extended(
+          label: const Text('Upload'),
+          icon: const Icon(Icons.upload),
+          onPressed: () {}, 
+        ),
+      ),
+      body: 
+         const Padding(
+          padding: EdgeInsets.only(top: 400),
+          
+          child: LinearProgressIndicator(
+            backgroundColor: Colors.amber,
+            value: 0.5,
+          ),
+        
       ),
     );
   }
